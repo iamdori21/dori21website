@@ -23,7 +23,7 @@ export function HeroSection() {
 
         {/* SEO-Optimized Primary Headline */}
         <h1 className="mx-auto max-w-4xl text-3xl sm:text-5xl lg:text-6xl tracking-tight mb-6 font-extrabold leading-tight break-keep">
-          말 한마디로 스마트폰 작업을 끝내는<br className="hidden sm:inline" />{" "}
+          한 번의 명령으로 끝까지 자동 실행하는<br className="hidden sm:inline" />{" "}
           <span className="bg-gradient-to-r from-amber-500 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
             AI 대리 비서, dori 21
           </span>
@@ -34,7 +34,7 @@ export function HeroSection() {
           "당신의 눈과 손이 되어드려요." 보이지 않아도, 터치가 서툴러도 괜찮습니다.
         </p>
         <p className="mx-auto max-w-2xl text-sm sm:text-base text-foreground/80 mb-10 break-keep leading-relaxed">
-          토스 송금부터 택시 호출, 온라인 쇼핑, 등본 발급까지 — 복잡한 스마트폰 앱 화면을 AI가 직접 인식하고 대신 터치해 드립니다.
+          토스 송금부터 택시 호출, 온라인 쇼핑, 등본 발급까지 — 원하는 작업을 한 번 명령하면 AI가 화면을 직접 보고 대신 터치해 자동으로 완료합니다.
         </p>
 
         {/* Download Buttons */}

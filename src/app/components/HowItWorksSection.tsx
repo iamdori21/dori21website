@@ -1,15 +1,15 @@
-import { Mic, Eye, Touchpad, CheckCircle2, ArrowRight } from "lucide-react";
+import { Zap, Eye, Touchpad, CheckCircle2, ArrowRight } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { Card, CardContent } from "./ui/card";
 
 const steps = [
   {
     step: "STEP 01",
-    title: "음성으로 자연스럽게 명령",
+    title: "원하는 작업 한 번만 명령",
     description:
-      '"토스로 엄마한테 5만원 송금해줘", "네이버스토어에서 바나나 한 손 주문해줘" 등 평소 대화하듯 편하게 말씀하세요.',
-    icon: Mic,
-    highlight: "복잡한 앱을 직접 찾지 않아도 됩니다.",
+      '"토스로 엄마한테 5만원 송금해줘", "네이버스토어에서 바나나 한 손 주문해줘" 등 필요한 작업을 한 번만 명령하세요.',
+    icon: Zap,
+    highlight: "앱을 일일이 찾거나 복잡한 메뉴를 헤맬 필요가 없습니다.",
     color: "from-amber-500/20 to-orange-500/10 text-amber-600 dark:text-amber-400 border-amber-500/30",
   },
   {
@@ -23,11 +23,11 @@ const steps = [
   },
   {
     step: "STEP 03",
-    title: "정확하고 안전한 대리 터치",
+    title: "끝까지 스스로 자동 실행 & 대리 터치",
     description:
       "사람이 직접 손가락으로 누르는 것처럼 앱의 단계별 버튼을 눌러 작업을 완료합니다. 결제나 비밀번호 등 민감 구간은 본인 승인을 거칩니다.",
     icon: Touchpad,
-    highlight: "안드로이드 접근성 공식 API로 안전 제어",
+    highlight: "한 번의 명령으로 전 과정을 안전하게 자동 완료",
     color: "from-emerald-500/20 to-teal-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30",
   },
 ];
@@ -36,7 +36,7 @@ const targetAudiences = [
   {
     badge: "접근성 지원",
     title: "시각장애인 및 저시력자",
-    desc: "작은 글씨나 복잡한 화면 구성을 볼 필요 없이 음성만으로 스마트폰의 모든 기능을 다룰 수 있습니다.",
+    desc: "작은 글씨나 복잡한 화면 구성을 볼 필요 없이 한 번의 명령만으로 스마트폰의 모든 기능을 스스로 실행할 수 있습니다.",
   },
   {
     badge: "효도 비서",
@@ -63,7 +63,7 @@ export function HowItWorksSection() {
             dori 21은 어떻게 스마트폰을 대신 조작할까요?
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground break-keep leading-relaxed">
-            별도의 복잡한 API 연동 없이, 실제 사람이 화면을 보고 터치하듯이 AI가 화면을 직접 제어합니다.
+            별도의 복잡한 절차 없이, 한 번 명령하면 AI가 화면을 직접 보고 터치하여 끝까지 자동 실행합니다.
           </p>
         </div>
 
