@@ -37,7 +37,7 @@ export function Header() {
         </nav>
         <div className="flex items-center space-x-3">
           <a href="#privacy">
-            <Button size="sm" className="hidden sm:inline-flex gap-1.5 font-medium">
+            <Button size="sm" className="hidden sm:inline-flex gap-1.5 font-medium rounded-full px-4 bg-foreground text-background hover:bg-foreground/90">
               <Download className="h-3.5 w-3.5" />
               앱 다운로드
             </Button>

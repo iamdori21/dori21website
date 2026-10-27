@@ -23,9 +23,11 @@ export function PrivacySection() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg" className="w-full sm:w-auto font-medium gap-2">
-              <Download className="h-4 w-4" />
-              원스토어에서 다운로드
+            <Button asChild size="lg" className="w-full sm:w-auto font-medium gap-2 cursor-pointer">
+              <a href="https://onesto.re/0001008686" target="_blank" rel="noopener noreferrer">
+                <Download className="h-4 w-4" />
+                원스토어에서 다운로드
+              </a>
             </Button>
             <Button variant="outline" size="lg" className="w-full sm:w-auto font-medium gap-2 bg-background hover:bg-muted">
               <Download className="h-4 w-4" />
