@@ -7,7 +7,7 @@ const steps = [
     step: "STEP 01",
     title: "원하는 작업 한 번만 명령",
     description:
-      '"토스로 엄마한테 5만원 송금해줘", "네이버스토어에서 바나나 한 손 주문해줘" 등 필요한 작업을 한 번만 명령하세요.',
+      '"토스로 엄마한테 5만원 송금해줘", "네이버스토어에서 바나나 한 송이 주문해줘" 등 필요한 작업을 한 번만 명령하세요.',
     icon: Zap,
     highlight: "앱을 일일이 찾거나 복잡한 메뉴를 헤맬 필요가 없습니다.",
     color: "from-amber-500/20 to-orange-500/10 text-amber-600 dark:text-amber-400 border-amber-500/30",
@@ -16,7 +16,7 @@ const steps = [
     step: "STEP 02",
     title: "실시간 AI 화면 인식 & 분석",
     description:
-      "dori21이 해당 앱을 즉시 실행하고, Google Gemini AI 비전 모델을 통해 현재 화면의 버튼, 입력창, 메뉴 위치를 정확히 판별합니다.",
+      "dori21이 해당 앱을 즉시 실행하고, AI 비전 모델을 통해 현재 화면의 버튼, 입력창, 메뉴 위치를 정확히 판별합니다.",
     icon: Eye,
     highlight: "UI가 바뀌어도 스스로 이해합니다.",
     color: "from-purple-500/20 to-indigo-500/10 text-purple-600 dark:text-purple-400 border-purple-500/30",
@@ -60,7 +60,7 @@ export function HowItWorksSection() {
             3단계 작동 원리
           </Badge>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4 break-keep">
-            dori 21은 어떻게 스마트폰을 대신 조작할까요?
+            어떻게 스마트폰을 대신 조작하나요?
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground break-keep leading-relaxed">
             별도의 복잡한 절차 없이, 한 번 명령하면 AI가 화면을 직접 보고 터치하여 끝까지 자동 실행합니다.

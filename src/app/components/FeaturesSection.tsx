@@ -42,10 +42,10 @@ export function FeaturesSection() {
         <div className="text-center mb-12 sm:mb-16">
           <Badge variant="outline" className="mb-4">자유로운 앱 연동 생태계</Badge>
           <h2 className="text-3xl md:text-4xl lg:text-5xl tracking-tight mb-4 font-bold">
-            dori21는 어떤 앱이든 직접 실행합니다.
+            어떤 앱이든 직접 실행합니다.
           </h2>
           <p className="max-w-2xl mx-auto text-base sm:text-lg text-muted-foreground break-keep">
-            카카오톡, 네이버, 토스, 유튜브부터 일상 서비스까지 AI가 복잡한 화면을 직접 조작합니다.
+            카카오톡, 네이버, 토스, 유튜브부터 일상 서비스까지 AI가 복잡한 화면을 조작합니다.
           </p>
         </div>
 

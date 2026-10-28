@@ -9,8 +9,8 @@ import { HelpCircle } from "lucide-react";
 
 const faqs = [
   {
-    q: "기존 스마트폰 비서나 자동화 도구와 dori 21은 무엇이 다른가요?",
-    a: "기존 비서는 제조사가 미리 정의해 둔 일부 단순 기능(알람 맞추기, 날씨 확인 등)만 실행할 수 있습니다. 반면 dori 21은 한 번 명령하면 AI가 실제 사람이 화면을 보고 손가락으로 누르는 것처럼 끝까지 스스로 자동 실행합니다. 토스 송금, 배달 주문, 네이버 쇼핑, 택시 호출 등 화면의 버튼과 입력창을 AI가 실시간으로 분석하여 어떤 앱이든 대신 직접 터치해 드립니다.",
+    q: "브라우저 기반 AI 에이전트나 기존 스마트폰 비서와 무엇이 다른가요?",
+    a: "최근 등장한 AI 에이전트들이 주로 PC 웹 브라우저 안에서의 작업을 돕는다면, dori 21은 일상의 중심인 스마트폰 네이티브 앱을 직접 움직이는 모바일 AI 에이전트입니다.\n\n송금, 배달 주문, 택시 호출, 쇼핑 등 우리가 매일 반복하는 일상은 대부분 스마트폰 앱에서 일어납니다. dori 21은 웹 환경에 갇히지 않고, 화면의 버튼과 입력창을 실시간으로 인식해 사람이 직접 손가락으로 누르는 것처럼 앱을 끝까지 조작하여 일상의 번거로움을 완전히 해결해 드립니다.",
   },
   {
     q: "금융 거래나 계좌이체 시 비밀번호와 개인정보는 안전한가요?",
@@ -56,7 +56,7 @@ export function FAQSection() {
                 <AccordionTrigger className="text-left font-bold text-base sm:text-lg hover:no-underline hover:text-primary transition-colors py-4">
                   {faq.q}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground text-sm sm:text-base leading-relaxed break-keep pt-1 pb-4">
+                <AccordionContent className="text-muted-foreground text-sm sm:text-base leading-relaxed break-keep whitespace-pre-line pt-1 pb-4">
                   {faq.a}
                 </AccordionContent>
               </AccordionItem>

@@ -10,7 +10,7 @@ export function HeroSection() {
           {/* Left Column: Headline, Clear Explanation, CTA */}
           <div className="lg:col-span-7 text-left space-y-6 sm:space-y-7">
             {/* Main Headline */}
-            <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-normal tracking-tight text-neutral-900 leading-[1.26] break-keep">
+            <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-bold tracking-tight text-neutral-900 leading-[1.26] break-keep">
               dori21은 시각장애인을 위한<br />
               안드로이드 전용 앱입니다.
             </h1>
