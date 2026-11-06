@@ -13,23 +13,18 @@ type Brand = {
 };
 
 const BRANDS: Brand[] = [
-  { name: "Kakao", bg: "#FEE500", color: "#3A1D1D", accent: "#F5C400", symbol: "K", pos: { left: "6%", top: "12%" }, delay: "0s" },
-  { name: "Naver", bg: "#03C75A", color: "#fff", accent: "#03C75A", symbol: "N", pos: { left: "82%", top: "8%" }, delay: "0.4s" },
-  { name: "Toss", bg: "#0064FF", color: "#fff", accent: "#0064FF", symbol: "T", pos: { left: "14%", top: "72%" }, delay: "0.8s" },
-  { name: "YouTube", bg: "#FF0000", color: "#fff", accent: "#FF0000", symbol: "▶", pos: { left: "78%", top: "68%" }, delay: "1.2s" },
-  { name: "Instagram", bg: "linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)", color: "#fff", accent: "#DC2743", symbol: "◎", pos: { left: "88%", top: "38%" }, delay: "1.6s" },
-  { name: "X", bg: "#000", color: "#fff", accent: "#3a3a3a", symbol: "𝕏", pos: { left: "3%", top: "44%" }, delay: "2s" },
-  { name: "Gov24", bg: "#003087", color: "#fff", accent: "#003087", symbol: "정", pos: { left: "48%", top: "4%" }, delay: "2.4s" },
-  { name: "Gemini", bg: "linear-gradient(135deg,#4285F4,#9C27B0)", color: "#fff", accent: "#6B5BFF", symbol: "✦", pos: { left: "60%", top: "82%" }, delay: "2.8s" },
-  { name: "GPT", bg: "#10A37F", color: "#fff", accent: "#10A37F", symbol: "⬡", pos: { left: "30%", top: "88%" }, delay: "3.2s" },
-  { name: "Trip.com", bg: "#1890FF", color: "#fff", accent: "#1890FF", symbol: "✈", pos: { left: "70%", top: "18%" }, delay: "3.6s" },
-  { name: "Kakao T", bg: "#FFCD00", color: "#111", accent: "#E0B000", symbol: "T", pos: { left: "87%", top: "55%" }, delay: "4.8s" },
-  { name: "Netflix", bg: "#000", color: "#E50914", accent: "#E50914", symbol: "N", pos: { left: "73%", top: "86%" }, delay: "5.2s" },
-  { name: "Karrot", bg: "#FF6F0F", color: "#fff", accent: "#FF6F0F", symbol: "당", pos: { left: "40%", top: "86%" }, delay: "5.6s" },
+  { name: "KakaoTalk", bg: "#FEE500", color: "#191919", accent: "#d4d4d8", symbol: "K", pos: { left: "10%", top: "16%" }, delay: "0s" },
+  { name: "Naver", bg: "#03C75A", color: "#fff", accent: "#d4d4d8", symbol: "N", pos: { left: "82%", top: "14%" }, delay: "0.6s" },
+  { name: "Toss", bg: "#0064FF", color: "#fff", accent: "#d4d4d8", symbol: "T", pos: { left: "14%", top: "72%" }, delay: "1.2s" },
+  { name: "YouTube", bg: "#FF0000", color: "#fff", accent: "#d4d4d8", symbol: "▶", pos: { left: "80%", top: "72%" }, delay: "1.8s" },
+  { name: "Gov24", bg: "#003087", color: "#fff", accent: "#d4d4d8", symbol: "정", pos: { left: "48%", top: "6%" }, delay: "2.4s" },
+  { name: "Kakao T", bg: "#191919", color: "#FFCD00", accent: "#d4d4d8", symbol: "T", pos: { left: "86%", top: "43%" }, delay: "3.0s" },
+  { name: "Karrot", bg: "#FF6F0F", color: "#fff", accent: "#d4d4d8", symbol: "당", pos: { left: "48%", top: "84%" }, delay: "3.6s" },
+  { name: "Shopping", bg: "#262626", color: "#fff", accent: "#d4d4d8", symbol: "🛍", pos: { left: "8%", top: "44%" }, delay: "4.2s" },
 ];
 
-/** dori brand yellow — lines start from this color at the logo */
-const DORI_YELLOW = "#FFC83D";
+/** Calm monochrome connection lines */
+const DORI_YELLOW = "#e4e4e7";
 
 interface LogoNetworkMapProps {
   className?: string;
@@ -162,33 +157,33 @@ export function LogoNetworkMap({ className = "" }: LogoNetworkMapProps) {
                 ref={(el) => {
                   iconRefs.current[i] = el;
                 }}
-                className="relative w-10 h-10 rounded-xl flex items-center justify-center text-base font-bold shadow-lg"
+                className="relative w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold border border-neutral-200/80"
                 style={{
                   background: brand.bg,
                   color: brand.color,
-                  boxShadow: `0 6px 16px -4px ${brand.accent}66, 0 0 0 3px #ffffff`,
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.06), 0 0 0 3px #ffffff",
                 }}
               >
                 {brand.symbol}
               </div>
-              <span className="text-[10px] font-medium text-foreground/40 tracking-wide">
+              <span className="text-[10px] font-medium text-neutral-400 tracking-wide">
                 {brand.name}
               </span>
             </div>
           ))}
           <style>{`
             @keyframes float {
-              0%, 100% { transform: translateY(0px) rotate(-2deg); opacity: 0.7; }
-              50% { transform: translateY(-14px) rotate(2deg); opacity: 1; }
+              0%, 100% { transform: translateY(0px); opacity: 0.85; }
+              50% { transform: translateY(-6px); opacity: 1; }
             }
             .animate-float {
-              animation: float 6s ease-in-out infinite;
+              animation: float 7s ease-in-out infinite;
             }
             @keyframes network-link-dash {
               to { stroke-dashoffset: -24; }
             }
             .network-link-flow {
-              animation: network-link-dash 2s linear infinite;
+              animation: network-link-dash 3s linear infinite;
             }
             @media (prefers-reduced-motion: reduce) {
               .animate-float, .network-link-flow { animation: none; }

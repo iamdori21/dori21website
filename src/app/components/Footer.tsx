@@ -2,7 +2,7 @@ import { DoriLogo } from "./DoriLogo";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/40 py-6 bg-muted/20">
+    <footer className="border-t border-stone-200/70 py-6 bg-[#FAFAF8]">
       <div className="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
         <div className="flex items-center gap-3">
           <DoriLogo size="sm" />

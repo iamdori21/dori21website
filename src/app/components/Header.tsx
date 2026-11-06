@@ -32,7 +32,7 @@ const socialLinks = [
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-stone-200/70 bg-[#FAFAF8]/95 backdrop-blur supports-[backdrop-filter]:bg-[#FAFAF8]/75">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <a href="#" className="flex items-center transition-opacity hover:opacity-90">
           <DoriLogo size="md" showIcon={false} />

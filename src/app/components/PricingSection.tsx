@@ -1,6 +1,4 @@
 import { Button } from "./ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
-import { Badge } from "./ui/badge";
 import { Check } from "lucide-react";
 
 const plans = [
@@ -54,52 +52,71 @@ const plans = [
 
 export function PricingSection() {
   return (
-    <section id="pricing" className="py-20">
-      <div className="container mx-auto px-4">
+    <section id="pricing" className="py-24 lg:py-32 bg-[#F4F3EF] border-t border-stone-200/70">
+      <div className="container mx-auto px-4 max-w-5xl">
         <div className="text-center mb-16">
-          <Badge variant="outline" className="mb-4">요금 안내</Badge>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl tracking-tight mb-4 font-bold break-keep">
+          <p className="text-xs font-semibold tracking-widest uppercase text-neutral-400 mb-3">
+            Pricing
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.02em] text-neutral-900 mb-4 break-keep">
             합리적이고 투명한 요금제
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-muted-foreground break-keep">
+          <p className="max-w-xl mx-auto text-base text-neutral-500 break-keep leading-relaxed">
             필요에 맞는 요금제를 선택하세요. 무료로 시작하고 언제든 업그레이드할 수 있습니다.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
           {plans.map((plan, index) => (
-            <Card key={index} className={`relative ${plan.popular ? 'border-primary shadow-lg' : ''}`}>
+            <div
+              key={index}
+              className={`relative rounded-2xl bg-white p-7 sm:p-8 flex flex-col justify-between transition-all ${
+                plan.popular
+                  ? "border-2 border-neutral-900 shadow-sm"
+                  : "border border-neutral-200/80"
+              }`}
+            >
               {plan.popular && (
-                <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-[11px] font-semibold bg-neutral-900 text-white">
                   인기 요금제
-                </Badge>
+                </span>
               )}
-              <CardHeader className="text-center pb-8">
-                <CardTitle className="text-xl mb-2">{plan.name}</CardTitle>
-                <div className="mb-2">
-                  <span className="text-3xl font-bold">{plan.price}</span>
-                  {plan.price !== "무료" && plan.price !== "별도 문의" && (
-                    <span className="text-muted-foreground"> /월</span>
-                  )}
+              <div>
+                <div className="mb-7">
+                  <h3 className="text-base font-bold text-neutral-900 mb-2">{plan.name}</h3>
+                  <div className="flex items-baseline gap-1 mb-2">
+                    <span className="text-3xl font-bold tracking-tight text-neutral-900">
+                      {plan.price}
+                    </span>
+                    {plan.price !== "무료" && plan.price !== "별도 문의" && (
+                      <span className="text-sm text-neutral-400">/월</span>
+                    )}
+                  </div>
+                  <p className="text-xs sm:text-sm text-neutral-500 break-keep leading-relaxed">
+                    {plan.description}
+                  </p>
                 </div>
-                <CardDescription className="break-keep">{plan.description}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 mb-8">
+
+                <ul className="space-y-3 mb-8 border-t border-neutral-100 pt-6">
                   {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center">
-                      <Check className="h-4 w-4 text-green-500 mr-3 flex-shrink-0" />
-                      <span className="text-sm break-keep">{feature}</span>
+                    <li key={featureIndex} className="flex items-start">
+                      <Check className="h-4 w-4 text-neutral-900 mr-2.5 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-neutral-600 break-keep">{feature}</span>
                     </li>
                   ))}
                 </ul>
-                <Button 
-                  className="w-full" 
-                  variant={plan.popular ? "default" : "outline"}
-                >
-                  {plan.cta}
-                </Button>
-              </CardContent>
-            </Card>
+              </div>
+
+              <Button
+                className={`w-full rounded-xl py-5 text-sm font-medium shadow-none ${
+                  plan.popular
+                    ? "bg-neutral-900 text-white hover:bg-neutral-800"
+                    : "border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900"
+                }`}
+                variant={plan.popular ? "default" : "outline"}
+              >
+                {plan.cta}
+              </Button>
+            </div>
           ))}
         </div>
       </div>

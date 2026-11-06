@@ -9,7 +9,7 @@ import { Footer } from "./components/Footer";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary">
+    <div className="min-h-screen bg-[#FAFAF8] text-foreground antialiased selection:bg-primary/20 selection:text-primary">
       <Header />
       <main>
         <HeroSection />

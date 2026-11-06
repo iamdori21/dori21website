@@ -31,60 +31,11 @@ export function SmartphoneMockup({
 
   return (
     <div className={`relative mx-auto flex justify-center ${className}`}>
-      {/* Soft Studio Radial Backlight Halo for pristine background separation */}
+      {/* Subtle Monochromatic Ambient Halo */}
       <div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[270px] sm:w-[330px] h-[330px] sm:h-[410px] rounded-full bg-gradient-to-tr from-slate-200/60 via-slate-100/80 to-indigo-100/40 blur-2xl pointer-events-none select-none z-0"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[260px] sm:w-[310px] h-[320px] sm:h-[390px] rounded-full bg-stone-200/60 blur-3xl pointer-events-none select-none z-0"
         aria-hidden
       />
-
-      {/* Decorative Wave Ribbon behind the phone */}
-      <svg
-        className="absolute -left-12 sm:-left-20 top-1/2 -translate-y-1/2 w-[360px] sm:w-[440px] h-[205px] pointer-events-none select-none z-0 opacity-85"
-        viewBox="0 0 680 320"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M0 200 C 120 280, 220 80, 390 160 C 510 220, 580 130, 680 140"
-          stroke="url(#wave-ribbon-1)"
-          strokeWidth="42"
-          strokeLinecap="round"
-          className="blur-[1.5px]"
-        />
-        <path
-          d="M20 215 C 135 295, 235 95, 405 175 C 520 230, 590 145, 690 155"
-          stroke="url(#wave-ribbon-2)"
-          strokeWidth="20"
-          strokeLinecap="round"
-        />
-        <defs>
-          <linearGradient id="wave-ribbon-1" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#f1f5f9" stopOpacity="0.1" />
-            <stop offset="35%" stopColor="#cbd5e1" stopOpacity="0.7" />
-            <stop offset="70%" stopColor="#94a3b8" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#f1f5f9" stopOpacity="0.05" />
-          </linearGradient>
-          <linearGradient id="wave-ribbon-2" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#e2e8f0" stopOpacity="0.1" />
-            <stop offset="40%" stopColor="#94a3b8" stopOpacity="0.6" />
-            <stop offset="75%" stopColor="#cbd5e1" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="#f8fafc" stopOpacity="0.05" />
-          </linearGradient>
-        </defs>
-      </svg>
-
-      {/* Dot Grid Matrix on Upper Right behind phone */}
-      <div
-        className="absolute -top-3 -right-3 sm:-top-5 sm:-right-5 w-16 sm:w-20 h-20 sm:h-24 pointer-events-none select-none z-0 opacity-60"
-        aria-hidden
-      >
-        <svg className="w-full h-full text-neutral-400" fill="currentColor">
-          <pattern id="hero-dot-grid" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
-            <circle cx="2" cy="2" r="1.3" />
-          </pattern>
-          <rect width="100%" height="100%" fill="url(#hero-dot-grid)" />
-        </svg>
-      </div>
 
       {/* Sleek Floating Device Frame */}
       <div className="relative z-10 flex flex-col items-center">

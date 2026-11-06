@@ -4,8 +4,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "./ui/accordion";
-import { Badge } from "./ui/badge";
-import { HelpCircle } from "lucide-react";
 
 const faqs = [
   {
@@ -32,31 +30,30 @@ const faqs = [
 
 export function FAQSection() {
   return (
-    <section id="faq" className="py-20 lg:py-28 bg-background border-t border-border/40">
-      <div className="container mx-auto px-4 max-w-4xl">
+    <section id="faq" className="py-24 lg:py-32 bg-[#FAFAF8] border-t border-stone-200/70">
+      <div className="container mx-auto px-4 max-w-3xl">
         {/* Section Header */}
         <div className="text-center mb-14">
-          <Badge variant="outline" className="mb-4">
-            <HelpCircle className="w-3.5 h-3.5 mr-1 text-primary" />
-            자주 묻는 질문
-          </Badge>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4 break-keep">
+          <p className="text-xs font-semibold tracking-widest uppercase text-neutral-400 mb-3">
+            FAQ
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.02em] text-neutral-900 mb-4 break-keep">
             궁금한 점이 있으신가요?
           </h2>
-          <p className="text-base sm:text-lg text-muted-foreground break-keep">
+          <p className="text-base text-neutral-500 break-keep">
             dori 21의 서비스 원리와 개인정보 보안, 사용법에 대해 자주 하시는 질문들을 모았습니다.
           </p>
         </div>
 
         {/* Accordion FAQ List */}
-        <div className="bg-card rounded-2xl border border-border/70 p-4 sm:p-8 shadow-xs">
+        <div className="bg-white rounded-2xl border border-stone-200/70 px-6 py-2 sm:px-8 sm:py-4">
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="border-border/60 py-1">
-                <AccordionTrigger className="text-left font-bold text-base sm:text-lg hover:no-underline hover:text-primary transition-colors py-4">
+              <AccordionItem key={index} value={`item-${index}`} className="border-neutral-200/70 py-1">
+                <AccordionTrigger className="text-left font-bold text-base text-neutral-900 hover:no-underline hover:text-neutral-600 transition-colors py-4">
                   {faq.q}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground text-sm sm:text-base leading-relaxed break-keep whitespace-pre-line pt-1 pb-4">
+                <AccordionContent className="text-neutral-500 text-sm sm:text-[15px] leading-[1.75] break-keep whitespace-pre-line pt-1 pb-5">
                   {faq.a}
                 </AccordionContent>
               </AccordionItem>
