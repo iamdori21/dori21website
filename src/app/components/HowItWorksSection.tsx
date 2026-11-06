@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Zap, Eye, Touchpad } from "lucide-react";
 
 const steps = [
   {
@@ -7,21 +6,18 @@ const steps = [
     title: "원하는 작업 한 번만 명령",
     description:
       '"토스로 엄마한테 5만원 송금해줘", "네이버스토어에서 바나나 한 송이 주문해줘" 등 필요한 작업을 한 번만 명령하세요. 앱을 일일이 찾거나 복잡한 메뉴를 헤맬 필요가 없습니다.',
-    icon: Zap,
   },
   {
     step: "02",
     title: "실시간 AI 화면 인식 & 분석",
     description:
       "dori21이 해당 앱을 즉시 실행하고, AI 비전 모델을 통해 현재 화면의 버튼, 입력창, 메뉴 위치를 정확히 판별합니다. 앱 UI가 업데이트되어도 스스로 이해합니다.",
-    icon: Eye,
   },
   {
     step: "03",
     title: "끝까지 스스로 자동 실행",
     description:
       "사람이 직접 손가락으로 누르는 것처럼 앱의 단계별 버튼을 눌러 작업을 완료합니다. 결제나 비밀번호 입력 같은 민감한 순간에는 안전하게 본인 승인을 거칩니다.",
-    icon: Touchpad,
   },
 ];
 
@@ -58,44 +54,31 @@ export function HowItWorksSection() {
           <p className="text-xs font-semibold tracking-widest uppercase text-neutral-400 mb-3">
             How it works
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.02em] text-neutral-900 mb-4 break-keep">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.02em] text-neutral-900 break-keep">
             어떻게 스마트폰을 대신 조작하나요?
           </h2>
-          <p className="text-base text-neutral-500 break-keep leading-relaxed">
-            복잡한 설정 없이 한 번만 말씀하세요. AI가 화면을 직접 보고 터치하여 끝까지 실행합니다.
-          </p>
         </div>
 
-        {/* 3 Steps Cards - Clean Monochrome Toss/Apple Style */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-24">
-          {steps.map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={idx}
-                className="bg-white rounded-2xl border border-neutral-200/80 p-7 sm:p-8 flex flex-col justify-between transition-colors hover:border-neutral-300"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-7">
-                    <span className="text-xs font-semibold tracking-wider text-neutral-400">
-                      STEP {item.step}
-                    </span>
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-neutral-100 text-neutral-800">
-                      <Icon className="w-4 h-4" />
-                    </div>
-                  </div>
+        {/* 3 Steps - Frameless Editorial Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12 mb-24">
+          {steps.map((item, idx) => (
+            <div
+              key={idx}
+              className="border-t border-stone-300/80 pt-6 flex flex-col"
+            >
+              <span className="text-xs font-bold tracking-widest text-neutral-400 mb-4">
+                STEP {item.step}
+              </span>
 
-                  <h3 className="text-lg font-bold text-neutral-900 mb-3 break-keep tracking-tight">
-                    {item.title}
-                  </h3>
+              <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-3 break-keep tracking-tight">
+                {item.title}
+              </h3>
 
-                  <p className="text-sm text-neutral-500 leading-[1.7] break-keep">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
+              <p className="text-sm text-neutral-500 leading-[1.75] break-keep">
+                {item.description}
+              </p>
+            </div>
+          ))}
         </div>
 
         {/* Who is it for? - Borderless Rolling Text Ticker / Carousel */}
