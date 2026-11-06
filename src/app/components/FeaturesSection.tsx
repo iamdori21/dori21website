@@ -1,76 +1,110 @@
 import { LogoNetworkMap } from "./LogoNetworkMap";
 
-const features = [
-  {
-    title: "토스로 계좌이체 해줘",
-    description: "토스 앱을 직접 실행하고 계좌이체 버튼을 선택해 이체를 완료합니다.",
-    badge: "금융 · 이체"
-  },
-  {
-    title: "네이버스토어에서 바나나 주문해줘",
-    description: "네이버 앱을 직접 실행하고 상품 검색과 구매 버튼을 선택해 주문을 완료합니다.",
-    badge: "쇼핑 · 커머스"
-  },
-  {
-    title: "주민등록 등본 발급해줘",
-    description: "정부24 앱을 직접 실행하고 등본 신청 메뉴를 선택해 발급을 완료합니다.",
-    badge: "공공 · 행정"
-  },
-  {
-    title: "숙소 예약해줘",
-    description: "숙박 앱을 직접 실행하고 최적의 객실과 예약 버튼을 선택해 예약을 완료합니다.",
-    badge: "여행 · 숙박"
-  },
-  {
-    title: "카카오택시 집으로 불러줘",
-    description: "카카오 T 앱을 직접 실행하고 목적지 설정 후 호출 버튼을 눌러 배차를 완료합니다.",
-    badge: "모빌리티"
-  },
-  {
-    title: "병원 진료 예약해줘",
-    description: "병원 접수 앱을 직접 실행하고 진료 순번 접수 버튼을 선택해 예약을 완료합니다.",
-    badge: "의료 · 생활"
-  }
+const row1Commands = [
+  { tag: "금융", text: "토스로 계좌이체 해줘" },
+  { tag: "쇼핑", text: "네이버스토어에서 바나나 주문해줘" },
+  { tag: "공공", text: "주민등록 등본 발급해줘" },
+  { tag: "모빌리티", text: "카카오택시 집으로 불러줘" },
+  { tag: "메시지", text: "카카오톡으로 딸에게 도착했다고 보내줘" },
+  { tag: "요금", text: "이번 달 휴대폰 요금 납부해줘" },
 ];
+
+const row2Commands = [
+  { tag: "의료", text: "동네 내과 진료 예약해줘" },
+  { tag: "숙박", text: "강릉 가족 여행 숙소 예약해줘" },
+  { tag: "배달", text: "자주 시키는 설렁탕집에서 포장 주문해줘" },
+  { tag: "미디어", text: "유튜브에서 잔잔한 클래식 틀어줘" },
+  { tag: "생활", text: "당근마켓에 올라온 새 글 읽어줘" },
+  { tag: "금융", text: "이번 달 카드 결제 예정 금액 확인해줘" },
+];
+
+function MarqueeRow({
+  items,
+  reverse = false,
+}: {
+  items: { tag: string; text: string }[];
+  reverse?: boolean;
+}) {
+  const doubled = [...items, ...items];
+
+  return (
+    <div className="flex overflow-hidden select-none group">
+      <div
+        className={`flex shrink-0 items-center gap-3 py-1.5 ${
+          reverse ? "animate-marquee-reverse" : "animate-marquee"
+        } group-hover:[animation-play-state:paused]`}
+      >
+        {doubled.map((item, idx) => (
+          <div
+            key={idx}
+            className="inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-white border border-stone-200/80 shadow-[0_2px_8px_rgba(0,0,0,0.02)] whitespace-nowrap transition-colors hover:border-neutral-400"
+          >
+            <span className="text-[11px] font-semibold text-neutral-400">
+              {item.tag}
+            </span>
+            <span className="h-3 w-[1px] bg-stone-200" aria-hidden />
+            <span className="text-sm sm:text-[15px] font-medium text-neutral-800 tracking-tight">
+              “{item.text}”
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export function FeaturesSection() {
   return (
     <section id="features" className="py-24 lg:py-32 bg-[#FAFAF8] border-t border-stone-200/70 overflow-hidden">
       <div className="container mx-auto px-4 max-w-5xl">
-        <div className="text-center mb-12 sm:mb-16">
+        <div className="text-center mb-12 sm:mb-14">
           <p className="text-xs font-semibold tracking-widest uppercase text-neutral-400 mb-3">
             Connected Ecosystem
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.02em] text-neutral-900 mb-4 break-keep">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.02em] text-neutral-900 break-keep">
             어떤 앱이든 직접 실행합니다
           </h2>
-          <p className="max-w-xl mx-auto text-base text-neutral-500 break-keep leading-relaxed">
-            카카오톡, 네이버, 토스, 정부24부터 일상 서비스까지 AI가 복잡한 화면을 대신 조작합니다.
-          </p>
         </div>
 
         {/* 3D dori21 Logo & Connected App Ecosystem Map */}
-        <LogoNetworkMap className="mb-14 sm:mb-18" />
+        <LogoNetworkMap className="mb-12 sm:mb-14" />
 
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className="rounded-2xl bg-white border border-stone-200/70 p-6 transition-colors hover:border-stone-300"
-              >
-                <span className="block text-[11px] font-medium text-neutral-400 mb-2">
-                  {feature.badge}
-                </span>
-                <h3 className="text-[15px] sm:text-base font-bold tracking-tight text-neutral-900 mb-2 break-keep leading-snug">
-                  “{feature.title}”
-                </h3>
-                <p className="text-xs sm:text-[13px] text-neutral-500 leading-relaxed break-keep">
-                  {feature.description}
-                </p>
-              </div>
-            ))}
-          </div>
+        {/* Flowing Command Pills Marquee with Left/Right Soft Fade */}
+        <div className="relative max-w-5xl mx-auto space-y-3">
+          {/* Left & Right Gradient Masks */}
+          <div
+            className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-[#FAFAF8] to-transparent z-10"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-28 bg-gradient-to-l from-[#FAFAF8] to-transparent z-10"
+            aria-hidden
+          />
+
+          <MarqueeRow items={row1Commands} />
+          <MarqueeRow items={row2Commands} reverse />
+
+          <style>{`
+            @keyframes marquee {
+              0% { transform: translateX(0%); }
+              100% { transform: translateX(-50%); }
+            }
+            @keyframes marquee-reverse {
+              0% { transform: translateX(-50%); }
+              100% { transform: translateX(0%); }
+            }
+            .animate-marquee {
+              animation: marquee 38s linear infinite;
+            }
+            .animate-marquee-reverse {
+              animation: marquee-reverse 42s linear infinite;
+            }
+            @media (prefers-reduced-motion: reduce) {
+              .animate-marquee, .animate-marquee-reverse {
+                animation: none;
+              }
+            }
+          `}</style>
         </div>
       </div>
     </section>
