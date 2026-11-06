@@ -2,6 +2,7 @@ import { Header } from "./components/Header";
 import { HeroSection } from "./components/HeroSection";
 import { HowItWorksSection } from "./components/HowItWorksSection";
 import { FeaturesSection } from "./components/FeaturesSection";
+import { PricingSection } from "./components/PricingSection";
 import { FAQSection } from "./components/FAQSection";
 import { PrivacySection } from "./components/PrivacySection";
 import { Footer } from "./components/Footer";
@@ -14,6 +15,7 @@ export default function App() {
         <HeroSection />
         <HowItWorksSection />
         <FeaturesSection />
+        <PricingSection />
         <FAQSection />
         <PrivacySection />
       </main>
