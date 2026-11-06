@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Zap, Eye, Touchpad } from "lucide-react";
 
 const steps = [
@@ -40,6 +41,15 @@ const targetAudiences = [
 ];
 
 export function HowItWorksSection() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % targetAudiences.length);
+    }, 3200);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section id="how-it-works" className="py-24 lg:py-32 bg-[#F4F3EF] border-t border-stone-200/70">
       <div className="container mx-auto px-4 max-w-5xl">
@@ -57,7 +67,7 @@ export function HowItWorksSection() {
         </div>
 
         {/* 3 Steps Cards - Clean Monochrome Toss/Apple Style */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-24">
           {steps.map((item, idx) => {
             const Icon = item.icon;
             return (
@@ -88,30 +98,58 @@ export function HowItWorksSection() {
           })}
         </div>
 
-        {/* Who is it for? - Minimal Monochrome Container */}
-        <div className="bg-white rounded-2xl border border-neutral-200/80 p-7 sm:p-10">
-          <div className="text-center max-w-xl mx-auto mb-8 sm:mb-10">
-            <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-2 break-keep tracking-tight">
-              이런 분들께 도움이 됩니다.
-            </h3>
-            <p className="text-sm text-neutral-500 break-keep">
-              디지털 격차 없이 누구나 자유롭게 스마트폰을 누릴 수 있는 세상을 만듭니다.
-            </p>
+        {/* Who is it for? - Borderless Rolling Text Ticker / Carousel */}
+        <div className="max-w-2xl mx-auto text-center pt-4">
+          <p className="text-xs font-semibold tracking-widest uppercase text-neutral-400 mb-3">
+            이런 분들께 도움이 됩니다
+          </p>
+
+          {/* Rolling Text Viewport */}
+          <div className="relative h-36 sm:h-32 overflow-hidden flex items-center justify-center">
+            {targetAudiences.map((target, idx) => {
+              const offset = idx - activeIndex;
+              const isActive = idx === activeIndex;
+              const isPrev =
+                idx === (activeIndex - 1 + targetAudiences.length) % targetAudiences.length;
+
+              let transformClass = "translate-y-10 opacity-0 pointer-events-none";
+              if (isActive) {
+                transformClass = "translate-y-0 opacity-100";
+              } else if (isPrev || offset < 0) {
+                transformClass = "-translate-y-10 opacity-0 pointer-events-none";
+              }
+
+              return (
+                <div
+                  key={target.title}
+                  aria-hidden={!isActive}
+                  className={`absolute inset-x-0 flex flex-col items-center justify-center px-4 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${transformClass}`}
+                >
+                  <h3 className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-3 break-keep tracking-tight">
+                    “{target.title}”
+                  </h3>
+                  <p className="text-sm sm:text-base text-neutral-500 leading-relaxed break-keep max-w-lg">
+                    {target.desc}
+                  </p>
+                </div>
+              );
+            })}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+          {/* Minimal Progress Dots */}
+          <div className="flex items-center justify-center gap-2 mt-4">
             {targetAudiences.map((target, idx) => (
-              <div
-                key={idx}
-                className="p-6 rounded-xl bg-[#FAFAF8] border border-stone-200/50 space-y-2"
-              >
-                <h4 className="text-base font-bold text-neutral-900 break-keep">
-                  {target.title}
-                </h4>
-                <p className="text-xs sm:text-sm text-neutral-500 leading-relaxed break-keep">
-                  {target.desc}
-                </p>
-              </div>
+              <button
+                key={target.title}
+                type="button"
+                onClick={() => setActiveIndex(idx)}
+                aria-label={target.title}
+                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                  idx === activeIndex
+                    ? "w-6 bg-neutral-900"
+                    : "w-1.5 bg-neutral-300 hover:bg-neutral-400"
+                }`}
+              />
             ))}
           </div>
         </div>
