@@ -29,7 +29,7 @@ export function HeroSection() {
           <div className="lg:col-span-6 text-left space-y-8">
             {/* Main Headline */}
             <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-bold tracking-[-0.025em] text-neutral-900 leading-[1.3] break-keep">
-              dori21는 시각장애인을 위한 <span className="text-[#0F9D58]">안드로이드 앱 </span>입니다.
+              dori21는 시각장애인을 위한 <span className="text-[#0F9D58]">AI 에이전트 </span>입니다.
             </h1>
 
             {/* Explanation: bold lead sentence + soft supporting text, scannable list */}

@@ -4,6 +4,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "./ui/accordion";
+import { Button } from "./ui/button";
+import { Download, ShieldCheck } from "lucide-react";
 
 const faqs = [
   {
@@ -35,18 +37,15 @@ export function FAQSection() {
         {/* Section Header */}
         <div className="text-center mb-14">
           <p className="text-xs font-semibold tracking-widest uppercase text-neutral-400 mb-3">
-            FAQ
+            FAQ & Security
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.02em] text-neutral-900 mb-4 break-keep">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-[-0.02em] text-neutral-900 break-keep">
             궁금한 점이 있으신가요?
           </h2>
-          <p className="text-base text-neutral-500 break-keep">
-            dori 21의 서비스 원리와 개인정보 보안, 사용법에 대해 자주 하시는 질문들을 모았습니다.
-          </p>
         </div>
 
         {/* Accordion FAQ List */}
-        <div className="bg-white rounded-2xl border border-stone-200/70 px-6 py-2 sm:px-8 sm:py-4">
+        <div className="bg-white rounded-2xl border border-stone-200/70 px-6 py-2 sm:px-8 sm:py-4 mb-16">
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
               <AccordionItem key={index} value={`item-${index}`} className="border-neutral-200/70 py-1">
@@ -59,6 +58,38 @@ export function FAQSection() {
               </AccordionItem>
             ))}
           </Accordion>
+        </div>
+
+        {/* Integrated Privacy Reassurance & Closing Download CTA */}
+        <div id="privacy" className="text-center pt-4 border-t border-stone-200/70">
+          <div className="inline-flex items-center gap-2 text-xs font-medium text-neutral-500 mt-10 mb-3">
+            <ShieldCheck className="w-4 h-4 text-neutral-800" />
+            <span>온디바이스 보안 설계 · 개인정보 무수집 원칙</span>
+          </div>
+          <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-neutral-900 mb-8 break-keep">
+            개인정보 걱정 없이 지금 바로 시작해 보세요
+          </h3>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Button
+              asChild
+              size="lg"
+              className="w-full sm:w-auto font-medium gap-2 px-6 py-6 text-sm rounded-xl bg-neutral-900 text-white hover:bg-neutral-800 shadow-none cursor-pointer"
+            >
+              <a href="https://onesto.re/0001008686" target="_blank" rel="noopener noreferrer">
+                <Download className="h-4 w-4" />
+                원스토어에서 다운로드
+              </a>
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full sm:w-auto font-medium gap-2 px-6 py-6 text-sm rounded-xl border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900 shadow-none"
+            >
+              <Download className="h-4 w-4 text-neutral-400" />
+              갤럭시 스토어에서 다운로드
+            </Button>
+          </div>
         </div>
       </div>
     </section>

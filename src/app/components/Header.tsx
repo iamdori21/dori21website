@@ -62,12 +62,6 @@ export function Header() {
           >
             자주 묻는 질문
           </a>
-          <a
-            href="#privacy"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            개인정보 보호
-          </a>
         </nav>
         <div className="flex items-center space-x-1 sm:space-x-1.5">
           {socialLinks.map((item) => (
