@@ -1,10 +1,28 @@
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { Check, CheckCircle2, Loader2, Send, X } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "./ui/dialog";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+import { Textarea } from "./ui/textarea";
+import { toast } from "sonner";
+import { Check, CheckCircle2, Loader2, Send } from "lucide-react";
 
 const DISCORD_WEBHOOK_URL =
   "https://discord.com/api/webhooks/1568549996209381459/A8oRFfgx9OWgCgP54Cq3n_HWjK_lVQUmzPZblgNfPD125m4LveqCqVo_VqO0p278e9EI";
-const DOWNLOAD_URL = "https://onesto.re/0001008686";
+const DOWNLOAD_URL = "https://m.onestore.co.kr/v2/ko-kr/app/0001008686?scYn=Y";
 
 const plans = [
   {
@@ -163,9 +181,11 @@ export function PricingSection() {
       setEmailId("");
       setCustomDomain("");
       setMessage("");
+      toast.success("도입 문의가 정상적으로 접수되었습니다.");
     } catch {
       setStatus("error");
       setErrorMessage("전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+      toast.error("전송 중 오류가 발생했습니다.");
     }
   };
 
@@ -242,169 +262,172 @@ export function PricingSection() {
         </div>
       </div>
 
-      {/* Discord Webhook Inquiry Modal */}
-      {isModalOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4"
-          onClick={handleCloseModal}
-        >
-          <div
-            className="relative w-full max-w-lg rounded-2xl bg-white border border-stone-200 p-6 sm:p-8 shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h3 className="text-lg sm:text-xl font-bold text-neutral-900 tracking-tight">
-                  엔터프라이즈 도입 문의
-                </h3>
-                <p className="text-xs sm:text-sm text-neutral-500 mt-0.5">
-                  남겨주신 연락처로 담당자가 빠르게 회신드립니다.
+      {/* Discord Webhook Inquiry Modal (shadcn/ui Dialog + Select + Input) */}
+      <Dialog
+        open={isModalOpen}
+        onOpenChange={(open) => {
+          if (!open) handleCloseModal();
+          else setIsModalOpen(true);
+        }}
+      >
+        <DialogContent className="rounded-2xl bg-white border-stone-200 p-6 sm:p-8 shadow-2xl sm:max-w-lg">
+          <DialogHeader className="text-left mb-2">
+            <DialogTitle className="text-lg sm:text-xl font-bold text-neutral-900 tracking-tight">
+              엔터프라이즈 도입 문의
+            </DialogTitle>
+            <DialogDescription className="text-xs sm:text-sm text-neutral-500">
+              남겨주신 연락처로 담당자가 빠르게 회신드립니다.
+            </DialogDescription>
+          </DialogHeader>
+
+          {status === "success" ? (
+            <div className="py-6 text-center space-y-4">
+              <div className="w-12 h-12 rounded-full bg-neutral-100 text-neutral-900 flex items-center justify-center mx-auto">
+                <CheckCircle2 className="w-6 h-6" />
+              </div>
+              <div className="space-y-1.5">
+                <h4 className="text-lg font-bold text-neutral-900">
+                  문의가 정상적으로 접수되었습니다
+                </h4>
+                <p className="text-sm text-neutral-500 break-keep">
+                  확인 후 남겨주신 연락처로 빠르게 안내드리겠습니다.
                 </p>
               </div>
-              <button
-                type="button"
-                onClick={handleCloseModal}
-                aria-label="닫기"
-                className="w-8 h-8 rounded-full flex items-center justify-center text-neutral-400 hover:text-neutral-900 hover:bg-neutral-100 transition-colors cursor-pointer"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            {status === "success" ? (
-              <div className="py-8 text-center space-y-4">
-                <div className="w-12 h-12 rounded-full bg-neutral-100 text-neutral-900 flex items-center justify-center mx-auto">
-                  <CheckCircle2 className="w-6 h-6" />
-                </div>
-                <div className="space-y-1.5">
-                  <h4 className="text-lg font-bold text-neutral-900">
-                    문의가 정상적으로 접수되었습니다
-                  </h4>
-                  <p className="text-sm text-neutral-500 break-keep">
-                    확인 후 남겨주신 연락처로 빠르게 안내드리겠습니다.
-                  </p>
-                </div>
-                <div className="pt-2">
-                  <Button
-                    type="button"
-                    onClick={handleCloseModal}
-                    className="rounded-xl px-8 py-5 text-sm font-medium bg-neutral-900 text-white hover:bg-neutral-800 cursor-pointer shadow-none"
-                  >
-                    확인
-                  </Button>
-                </div>
+              <div className="pt-2">
+                <Button
+                  type="button"
+                  onClick={handleCloseModal}
+                  className="rounded-xl px-8 py-5 text-sm font-medium bg-neutral-900 text-white hover:bg-neutral-800 cursor-pointer shadow-none"
+                >
+                  확인
+                </Button>
               </div>
-            ) : (
-              <form onSubmit={handleSubmitInquiry} className="space-y-4">
-                <div>
-                  <label className="block text-xs font-semibold text-neutral-500 mb-1.5">
-                    기관 / 기업명 및 담당자 성함
-                  </label>
-                  <input
+            </div>
+          ) : (
+            <form onSubmit={handleSubmitInquiry} className="space-y-4">
+              <div className="space-y-1.5">
+                <Label className="text-xs font-semibold text-neutral-500">
+                  기관 / 기업명 및 담당자 성함
+                </Label>
+                <Input
+                  type="text"
+                  required
+                  value={organization}
+                  onChange={(e) => setOrganization(e.target.value)}
+                  placeholder="예: OO시각장애인복지관 홍길동"
+                  className="h-10 rounded-xl border-neutral-200 bg-white text-sm text-neutral-900 placeholder:text-neutral-400 focus-visible:ring-neutral-900/20 focus-visible:border-neutral-900"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <Label className="text-xs font-semibold text-neutral-500">
+                  회신받을 전화번호{" "}
+                  <span className="font-normal text-neutral-400">
+                    (숫자만 입력해도 자동 완성)
+                  </span>
+                </Label>
+                <Input
+                  type="tel"
+                  inputMode="numeric"
+                  required
+                  value={phone}
+                  onChange={(e) => setPhone(formatPhoneNumber(e.target.value))}
+                  placeholder="010-1234-5678"
+                  className="h-10 rounded-xl border-neutral-200 bg-white text-sm text-neutral-900 placeholder:text-neutral-400 focus-visible:ring-neutral-900/20 focus-visible:border-neutral-900"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <Label className="text-xs font-semibold text-neutral-500">
+                  회신받을 이메일
+                </Label>
+                <div className="flex items-center gap-1.5">
+                  <Input
                     type="text"
                     required
-                    value={organization}
-                    onChange={(e) => setOrganization(e.target.value)}
-                    placeholder="예: OO시각장애인복지관 홍길동"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-neutral-200 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors"
+                    value={emailId}
+                    onChange={(e) => setEmailId(e.target.value.replace(/\s/g, ""))}
+                    placeholder="이메일 아이디"
+                    className="h-10 min-w-0 flex-1 rounded-xl border-neutral-200 bg-white text-sm text-neutral-900 placeholder:text-neutral-400 focus-visible:ring-neutral-900/20 focus-visible:border-neutral-900"
                   />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-neutral-500 mb-1.5">
-                    회신받을 전화번호 <span className="font-normal text-neutral-400">(숫자만 입력해도 자동 완성)</span>
-                  </label>
-                  <input
-                    type="tel"
-                    inputMode="numeric"
-                    required
-                    value={phone}
-                    onChange={(e) => setPhone(formatPhoneNumber(e.target.value))}
-                    placeholder="010-1234-5678"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-neutral-200 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-neutral-500 mb-1.5">
-                    회신받을 이메일
-                  </label>
-                  <div className="flex items-center gap-1.5">
-                    <input
+                  <span className="text-neutral-400 font-medium text-sm select-none">
+                    @
+                  </span>
+                  {emailDomainSelect === "직접 입력" ? (
+                    <Input
                       type="text"
                       required
-                      value={emailId}
-                      onChange={(e) => setEmailId(e.target.value.replace(/\s/g, ""))}
-                      placeholder="이메일 아이디"
-                      className="w-full min-w-0 flex-1 px-3.5 py-2.5 rounded-xl border border-neutral-200 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors"
+                      value={customDomain}
+                      onChange={(e) =>
+                        setCustomDomain(e.target.value.replace(/\s/g, ""))
+                      }
+                      placeholder="org.kr"
+                      className="h-10 w-28 sm:w-32 rounded-xl border-neutral-200 bg-white text-sm text-neutral-900 placeholder:text-neutral-400 focus-visible:ring-neutral-900/20 focus-visible:border-neutral-900"
                     />
-                    <span className="text-neutral-400 font-medium text-sm select-none">@</span>
-                    {emailDomainSelect === "직접 입력" ? (
-                      <input
-                        type="text"
-                        required
-                        value={customDomain}
-                        onChange={(e) => setCustomDomain(e.target.value.replace(/\s/g, ""))}
-                        placeholder="org.kr"
-                        className="w-32 sm:w-36 px-3 py-2.5 rounded-xl border border-neutral-200 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors"
-                      />
-                    ) : null}
-                    <select
-                      value={emailDomainSelect}
-                      onChange={(e) => setEmailDomainSelect(e.target.value)}
-                      className="px-3 py-2.5 rounded-xl border border-neutral-200 bg-white text-sm text-neutral-800 focus:outline-none focus:border-neutral-900 transition-colors cursor-pointer"
-                    >
-                      {EMAIL_DOMAINS.map((domain) => (
-                        <option key={domain} value={domain}>
-                          {domain}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-neutral-500 mb-1.5">
-                    문의 내용
-                  </label>
-                  <textarea
-                    rows={4}
-                    required
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="예상 이용 인원, 도입 희망 시기, 궁금하신 점 등을 자유롭게 적어주세요."
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-neutral-200 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-neutral-900 transition-colors resize-none"
-                  />
-                </div>
-
-                {errorMessage && (
-                  <p className="text-xs text-red-600 font-medium">{errorMessage}</p>
-                )}
-
-                <div className="pt-2">
-                  <Button
-                    type="submit"
-                    disabled={status === "sending"}
-                    className="w-full rounded-xl py-5 text-sm font-medium bg-neutral-900 text-white hover:bg-neutral-800 gap-2 cursor-pointer shadow-none"
+                  ) : null}
+                  <Select
+                    value={emailDomainSelect}
+                    onValueChange={setEmailDomainSelect}
                   >
-                    {status === "sending" ? (
-                      <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        접수 중...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4" />
-                        문의 접수하기
-                      </>
-                    )}
-                  </Button>
+                    <SelectTrigger className="h-10 w-[130px] rounded-xl border-neutral-200 bg-white text-sm text-neutral-800 cursor-pointer">
+                      <SelectValue placeholder="도메인 선택" />
+                    </SelectTrigger>
+                    <SelectContent className="rounded-xl bg-white border-stone-200">
+                      {EMAIL_DOMAINS.map((domain) => (
+                        <SelectItem
+                          key={domain}
+                          value={domain}
+                          className="cursor-pointer text-sm"
+                        >
+                          {domain}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
-              </form>
-            )}
-          </div>
-        </div>
-      )}
+              </div>
+
+              <div className="space-y-1.5">
+                <Label className="text-xs font-semibold text-neutral-500">
+                  문의 내용
+                </Label>
+                <Textarea
+                  rows={4}
+                  required
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="예상 이용 인원, 도입 희망 시기, 궁금하신 점 등을 자유롭게 적어주세요."
+                  className="rounded-xl border-neutral-200 bg-white text-sm text-neutral-900 placeholder:text-neutral-400 focus-visible:ring-neutral-900/20 focus-visible:border-neutral-900 resize-none"
+                />
+              </div>
+
+              {errorMessage && (
+                <p className="text-xs text-red-600 font-medium">{errorMessage}</p>
+              )}
+
+              <div className="pt-2">
+                <Button
+                  type="submit"
+                  disabled={status === "sending"}
+                  className="w-full rounded-xl py-5 text-sm font-medium bg-neutral-900 text-white hover:bg-neutral-800 gap-2 cursor-pointer shadow-none"
+                >
+                  {status === "sending" ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      접수 중...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      문의 접수하기
+                    </>
+                  )}
+                </Button>
+              </div>
+            </form>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }

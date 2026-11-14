@@ -1,5 +1,6 @@
-import { useState } from "react";
 import { ChevronUp } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { toast } from "sonner";
 
 const footerColumns = [
   {
@@ -16,10 +17,11 @@ const footerColumns = [
     links: [
       {
         label: "원스토어 (ONE store)",
-        href: "https://onesto.re/0001008686",
+        href: "https://m.onestore.co.kr/v2/ko-kr/app/0001008686?scYn=Y",
         external: true,
       },
-      { label: "갤럭시 스토어", href: "#how-it-works" },
+      // TODO: 갤럭시 스토어 등록 후 주석 해제
+      // { label: "갤럭시 스토어", href: "#how-it-works" },
       { label: "안드로이드 전용 안내", href: "#faq" },
     ],
   },
@@ -40,7 +42,13 @@ const footerColumns = [
 ];
 
 export function Footer() {
-  const [showInfoCard, setShowInfoCard] = useState(false);
+  const handleCopyContactEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText("contact@dori21.com").catch(() => {});
+    }
+    toast.success("이메일 주소(contact@dori21.com)가 복사되었습니다.");
+  };
 
   return (
     <footer className="bg-[#191918] text-neutral-300 pt-14 pb-10 sm:pt-16 sm:pb-12">
@@ -59,6 +67,11 @@ export function Footer() {
                       href={link.href}
                       target={link.external ? "_blank" : undefined}
                       rel={link.external ? "noopener noreferrer" : undefined}
+                      onClick={
+                        link.href === "mailto:contact@dori21.com"
+                          ? handleCopyContactEmail
+                          : undefined
+                      }
                       className="text-xs sm:text-[13px] text-neutral-400 hover:text-white transition-colors"
                     >
                       {link.label}
@@ -70,36 +83,37 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Bottom Bar with Expandable Business Info Card & Contact Email */}
+        {/* Bottom Bar with shadcn/ui Popover & Contact Email */}
         <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-6 border-t border-white/10">
-          <div className="relative">
-            {showInfoCard && (
-              <div className="absolute bottom-9 left-0 z-20 w-72 sm:w-80 rounded-xl bg-white text-neutral-700 p-4 shadow-xl border border-neutral-200 text-xs space-y-1.5 leading-relaxed">
-                <p>서비스명: dori 21 (도리 21)</p>
-                <p>팀/운영: DDACrew</p>
-                <p>문의 및 제휴: contact@dori21.com</p>
-              </div>
-            )}
-            <button
-              type="button"
-              onClick={() => setShowInfoCard((prev) => !prev)}
-              className="inline-flex items-center gap-1.5 text-xs text-neutral-400 hover:text-white transition-colors cursor-pointer"
+          <Popover>
+            <PopoverTrigger asChild>
+              <button
+                type="button"
+                className="group inline-flex items-center gap-1.5 text-xs text-neutral-400 hover:text-white transition-colors cursor-pointer outline-none"
+              >
+                <span>© 2026 dori 21</span>
+                <ChevronUp className="w-3.5 h-3.5 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+              </button>
+            </PopoverTrigger>
+            <PopoverContent
+              side="top"
+              align="start"
+              sideOffset={10}
+              className="w-72 sm:w-80 rounded-xl bg-white text-neutral-700 p-4 shadow-xl border border-neutral-200 text-xs space-y-1.5 leading-relaxed"
             >
-              <span>© 2026 dori 21</span>
-              <ChevronUp
-                className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                  showInfoCard ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-          </div>
+              <p>서비스명: dori 21 (도리 21)</p>
+              <p>팀/운영: DDACrew</p>
+              <p>문의 및 제휴: contact@dori21.com</p>
+            </PopoverContent>
+          </Popover>
 
-          <a
-            href="mailto:contact@dori21.com"
-            className="text-xs text-neutral-400 hover:text-white transition-colors"
+          <button
+            type="button"
+            onClick={handleCopyContactEmail}
+            className="text-xs text-neutral-400 hover:text-white transition-colors cursor-pointer"
           >
             문의하기 - contact@dori21.com
-          </a>
+          </button>
         </div>
       </div>
     </footer>

@@ -1,6 +1,7 @@
 import { Button } from "./ui/button";
 import { Download, Hand, MessageCircle, ShieldCheck } from "lucide-react";
 import { SmartphoneMockup } from "./SmartphoneMockup";
+import { OneStoreQrButton } from "./OneStoreQrButton";
 
 const points = [
   {
@@ -49,18 +50,26 @@ export function HeroSection() {
               ))}
             </ul>
 
-            {/* Direct Download CTAs */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+            {/* Direct Download CTA + QR side-by-side with matching height */}
+            <div className="flex flex-row items-center gap-4 sm:gap-5 pt-1">
               <Button
                 asChild
                 size="lg"
-                className="w-full sm:w-auto font-medium gap-2 px-6 py-6 text-sm rounded-xl bg-neutral-900 text-white hover:bg-neutral-800 transition-all cursor-pointer shadow-none"
+                className="h-28 min-w-[240px] sm:min-w-[272px] !px-9 rounded-2xl bg-neutral-900 text-white hover:bg-neutral-800 transition-all cursor-pointer shadow-none"
               >
-                <a href="https://onesto.re/0001008686" target="_blank" rel="noopener noreferrer">
-                  <Download className="h-4 w-4" />
-                  원스토어에서 다운로드
+                <a href="https://m.onestore.co.kr/v2/ko-kr/app/0001008686?scYn=Y" target="_blank" rel="noopener noreferrer">
+                  <span className="flex items-center justify-center gap-4">
+                    <Download className="h-5 w-5 shrink-0" />
+                    <span className="text-left text-[16px] sm:text-[17px] font-semibold leading-[1.4] tracking-tight">
+                      원스토어에서
+                      <br />
+                      다운로드하기
+                    </span>
+                  </span>
                 </a>
               </Button>
+              <OneStoreQrButton />
+              {/* TODO: 갤럭시 스토어 등록 후 주석 해제
               <Button
                 asChild
                 variant="outline"
@@ -72,6 +81,7 @@ export function HeroSection() {
                   갤럭시 스토어에서 다운로드
                 </a>
               </Button>
+              */}
             </div>
           </div>
 

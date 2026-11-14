@@ -6,6 +6,7 @@ import {
 } from "./ui/accordion";
 import { Button } from "./ui/button";
 import { Download, ShieldCheck } from "lucide-react";
+import { OneStoreQrButton } from "./OneStoreQrButton";
 
 const faqs = [
   {
@@ -70,17 +71,25 @@ export function FAQSection() {
             개인정보 걱정 없이 지금 바로 시작해 보세요
           </h3>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <div className="flex flex-row items-center justify-center gap-4 sm:gap-5">
             <Button
               asChild
               size="lg"
-              className="w-full sm:w-auto font-medium gap-2 px-6 py-6 text-sm rounded-xl bg-neutral-900 text-white hover:bg-neutral-800 shadow-none cursor-pointer"
+              className="h-28 min-w-[240px] sm:min-w-[272px] !px-9 rounded-2xl bg-neutral-900 text-white hover:bg-neutral-800 shadow-none cursor-pointer"
             >
-              <a href="https://onesto.re/0001008686" target="_blank" rel="noopener noreferrer">
-                <Download className="h-4 w-4" />
-                원스토어에서 다운로드
+              <a href="https://m.onestore.co.kr/v2/ko-kr/app/0001008686?scYn=Y" target="_blank" rel="noopener noreferrer">
+                <span className="flex items-center justify-center gap-4">
+                  <Download className="h-5 w-5 shrink-0" />
+                  <span className="text-left text-[16px] sm:text-[17px] font-semibold leading-[1.4] tracking-tight">
+                    원스토어에서
+                    <br />
+                    다운로드하기
+                  </span>
+                </span>
               </a>
             </Button>
+            <OneStoreQrButton />
+            {/* TODO: 갤럭시 스토어 등록 후 주석 해제
             <Button
               variant="outline"
               size="lg"
@@ -89,6 +98,7 @@ export function FAQSection() {
               <Download className="h-4 w-4 text-neutral-400" />
               갤럭시 스토어에서 다운로드
             </Button>
+            */}
           </div>
         </div>
       </div>

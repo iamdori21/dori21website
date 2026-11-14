@@ -1,4 +1,22 @@
 import { DoriLogo } from "./DoriLogo";
+import { Menu, Download } from "lucide-react";
+import { Button } from "./ui/button";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "./ui/sheet";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
+
+const navItems = [
+  { label: "작동 원리", href: "#how-it-works" },
+  { label: "주요 기능", href: "#features" },
+  { label: "요금제", href: "#pricing" },
+  { label: "자주 묻는 질문", href: "#faq" },
+];
 
 const socialLinks = [
   {
@@ -33,50 +51,85 @@ const socialLinks = [
 export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-stone-200/70 bg-[#FAFAF8]/95 backdrop-blur supports-[backdrop-filter]:bg-[#FAFAF8]/75">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 max-w-6xl">
         <a href="#" className="flex items-center transition-opacity hover:opacity-90">
           <DoriLogo size="md" showIcon={false} />
         </a>
+
         <nav className="hidden md:flex items-center space-x-7">
-          <a
-            href="#how-it-works"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            작동 원리
-          </a>
-          <a
-            href="#features"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            주요 기능
-          </a>
-          <a
-            href="#pricing"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            요금제
-          </a>
-          <a
-            href="#faq"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            자주 묻는 질문
-          </a>
-        </nav>
-        <div className="flex items-center space-x-1 sm:space-x-1.5">
-          {socialLinks.map((item) => (
+          {navItems.map((nav) => (
             <a
-              key={item.name}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={item.name}
-              title={item.name}
-              className="w-9 h-9 flex items-center justify-center rounded-full text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100 transition-all duration-150"
+              key={nav.href}
+              href={nav.href}
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
-              {item.icon}
+              {nav.label}
             </a>
           ))}
+        </nav>
+
+        <div className="flex items-center space-x-1 sm:space-x-1.5">
+          {socialLinks.map((item) => (
+            <Tooltip key={item.name}>
+              <TooltipTrigger asChild>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={item.name}
+                  className="w-9 h-9 flex items-center justify-center rounded-full text-neutral-500 hover:text-neutral-900 hover:bg-neutral-200/60 transition-all duration-150"
+                >
+                  {item.icon}
+                </a>
+              </TooltipTrigger>
+              <TooltipContent sideOffset={6}>{item.name}</TooltipContent>
+            </Tooltip>
+          ))}
+
+          {/* Mobile Menu Sheet (shadcn/ui) */}
+          <div className="md:hidden pl-1">
+            <Sheet>
+              <SheetTrigger asChild>
+                <button
+                  type="button"
+                  aria-label="메뉴 열기"
+                  className="w-9 h-9 flex items-center justify-center rounded-full text-neutral-700 hover:bg-neutral-200/60 transition-colors cursor-pointer"
+                >
+                  <Menu className="w-5 h-5" />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="right" className="bg-[#FAFAF8] border-stone-200/80 p-6">
+                <SheetHeader className="p-0 pb-6 border-b border-stone-200/70 text-left">
+                  <SheetTitle>
+                    <DoriLogo size="sm" showIcon={false} />
+                  </SheetTitle>
+                </SheetHeader>
+                <nav className="flex flex-col space-y-4 pt-4">
+                  {navItems.map((nav) => (
+                    <SheetClose asChild key={nav.href}>
+                      <a
+                        href={nav.href}
+                        className="text-base font-semibold text-neutral-800 hover:text-neutral-500 transition-colors py-1"
+                      >
+                        {nav.label}
+                      </a>
+                    </SheetClose>
+                  ))}
+                </nav>
+                <div className="mt-auto pt-6 border-t border-stone-200/70">
+                  <Button
+                    asChild
+                    className="w-full rounded-xl py-5 text-sm font-medium bg-neutral-900 text-white hover:bg-neutral-800 gap-2 shadow-none"
+                  >
+                    <a href="https://m.onestore.co.kr/v2/ko-kr/app/0001008686?scYn=Y" target="_blank" rel="noopener noreferrer">
+                      <Download className="w-4 h-4" />
+                      원스토어에서 다운로드
+                    </a>
+                  </Button>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
     </header>

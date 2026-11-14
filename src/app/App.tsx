@@ -5,6 +5,7 @@ import { FeaturesSection } from "./components/FeaturesSection";
 import { PricingSection } from "./components/PricingSection";
 import { FAQSection } from "./components/FAQSection";
 import { Footer } from "./components/Footer";
+import { Toaster } from "./components/ui/sonner";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <FAQSection />
       </main>
       <Footer />
+      <Toaster position="bottom-right" />
     </div>
   );
 }
